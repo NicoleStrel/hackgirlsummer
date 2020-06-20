@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:havemyback/models/CRUDModel.dart';
+import 'package:havemyback/models/organisationModel.dart';
 import 'package:havemyback/profile/listCard.dart';
+import 'package:provider/provider.dart';
 const String page3 = "Profile";
 
 class Profile extends StatefulWidget {
@@ -9,68 +12,78 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<CRUDModel>(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.edit , color: Colors.red,),
-                ],
-              ),
-              SizedBox(height: 25,),
-              CircleAvatar(
-                backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
-                maxRadius: 65,
-              ),
-              SizedBox(height: 15,),
-              Text("Company Name",
-                style: TextStyle(
-                  fontSize: 18,
-                )),
-              SizedBox(height:5),
-              Text("Company description",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ) ,),
-              SizedBox(height: 5,),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 6,vertical:2),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.red[200],
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
-                child: Text("Technology"),
-              ),
-              SizedBox(height: 5,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.location_on),
-                  Text("Location",
-                    style: TextStyle(
-                      fontSize: 10,
+          child: FutureBuilder<Organisation>(
+            future: profileProvider.fetchOrganisation("manya@gmail.com"),
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.edit , color: Colors.red,),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15),
-              Column(
-                children: <Widget>[
-                  _tabSection(context),
-                ],
-              )
-            ],
+                    SizedBox(height: 25,),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
+                      maxRadius: 65,
+                    ),
+                    SizedBox(height: 15,),
+                    Text(snapshot.data.cname,
+                        style: TextStyle(
+                          fontSize: 18,
+                        )),
+                    SizedBox(height:5),
+                    Text(snapshot.data.desc,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ) ,),
+                    SizedBox(height: 5,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 6,vertical:2),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.red[200],
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Text(snapshot.data.category),
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.location_on),
+                        Text(snapshot.data.location,
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    Column(
+                      children: <Widget>[
+                        _tabSection(context),
+                      ],
+                    )
+                  ],
+                );
+              }
+              else return CircularProgressIndicator();
+            }
           ),
         ),
       ),
