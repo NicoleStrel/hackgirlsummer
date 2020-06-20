@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'authentication.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
 
   final BaseAuth auth;
   final VoidCallback loginCallback;
+  
 
   @override
   State<StatefulWidget> createState() => new _LoginSignupPageState();
@@ -13,11 +15,20 @@ class LoginSignupPage extends StatefulWidget {
 
 class _LoginSignupPageState extends State<LoginSignupPage> {
   final _formKey = new GlobalKey<FormState>();
+  final databaseReference = Firestore.instance;
 
   String _email;
   String _password;
-  String _errorMessage;
+  String _errorMessage; //collects all the error messages from the functions
+  String _fname;
+  String _lastname;
+  String _location;
+  String _specialisation;
+  String _cname;
+  String _desc;
+  String _category;
 
+  bool _isMentor;
   bool _isLoginForm;
   bool _isLoading;
 
@@ -35,18 +46,18 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   void validateAndSubmit() async {
     setState(() {
       _errorMessage = "";
-      _isLoading = true;
+      //_isLoading = true;
     });
     if (validateAndSave()) {
+      
       String userId = "";
+      //createRecord();
       try {
         if (_isLoginForm) {
           userId = await widget.auth.signIn(_email, _password);
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
-          //widget.auth.sendEmailVerification();
-          //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
         }
         setState(() {
@@ -65,6 +76,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         });
       }
     }
+    //if new user:
+    
+    if (!_isLoginForm ){
+        createRecord();
+    }
+    
   }
 
   @override
@@ -72,6 +89,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     _errorMessage = "";
     _isLoading = false;
     _isLoginForm = true;
+    _isMentor =false;
     super.initState();
   }
 
@@ -86,17 +104,45 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       _isLoginForm = !_isLoginForm;
     });
   }
+  void toggleAccountMode(){
+    resetForm();
+    setState(() {
+      _isMentor =!_isMentor;
+    });
+  }
+  void createRecord() async {
+    if (_isMentor){
+      await databaseReference.collection("mentors")
+        .document(_email)
+        .setData({
+          'email': _email,
+          'fname': _fname,
+          'lastname': _lastname,
+          'location': _location,
+          'specialisation': _specialisation,
+        });
+    }
+    else{
+        await databaseReference.collection("organisations")
+        .document(_email)
+        .setData({
+          'Cname': _cname,
+          'desc': _desc,
+          'email': _email,
+          'location': _location,
+          'category': _category,
+        });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Flutter login demo'),
-        ),
+        
         body: Stack(
           children: <Widget>[
-            _showForm(),
-            _showCircularProgress(),
+            _showForm(), //form 
+            _showCircularProgress(), //progress after
           ],
         ));
   }
@@ -111,29 +157,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content:
-//              new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                toggleFormMode();
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
-
   Widget _showForm() {
     return new Container(
         padding: EdgeInsets.all(16.0),
@@ -141,18 +164,31 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           key: _formKey,
           child: new ListView(
             shrinkWrap: true,
-            children: <Widget>[
+            children: _isLoginForm ? <Widget>[
               showLogo(),
+              showProfileChoice(),
+              showEmailInput(),
+              showPasswordInput(),
+              showPrimaryButton(),
+              showSecondaryButton(),
+              showErrorMessage(),
+            ] : <Widget>[
+              showLogo(),
+              showProfileChoice(),
+              showNameInput(),
+              showDescInput(),
+              showCategoryInput(),
+              showLocationInput(),
               showEmailInput(),
               showPasswordInput(),
               showPrimaryButton(),
               showSecondaryButton(),
               showErrorMessage(),
             ],
+              
           ),
         ));
   }
-
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return new Text(
@@ -174,7 +210,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return new Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 48.0,
@@ -183,10 +219,18 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
+  Widget showProfileChoice(){
+      return new FlatButton(
+        child: new Text(
+            _isMentor ? 'Account Type: Mentor' : 'Account Type: Company',
+            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+        onPressed: toggleAccountMode
+    );
+  }
 
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -202,10 +246,85 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
+  
+  Widget showNameInput(){
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.text,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: _isMentor ? 'First Name' : 'Company Name',
+            icon: new Icon(
+              Icons.mail,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? _isMentor ? 'First Name can\'t be empty' : 'Company name can\'t be empty' : null,
+        onSaved: (value) => _isMentor ? _fname=value.trim() : _cname = value.trim(),
+      ),
+    );
+  }
+  Widget showDescInput(){
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.text,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: _isMentor ? 'Last Name' : 'Short Description',
+            icon: new Icon(
+              Icons.mail,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? _isMentor ? 'Last Name can\'t be empty' : 'Description can\'t be empty' : null,
+        onSaved: (value) => _isMentor ? _lastname=value.trim() : _desc = value.trim(),
+      ),
+    );
+  }
+  Widget showLocationInput(){
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.text,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: 'Location',
+            icon: new Icon(
+              Icons.mail,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? 'Location can\'t be empty' : null,
+        onSaved: (value) =>  _location = value.trim(),
+      ),
+    );
+  }
+  Widget showCategoryInput(){
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.text,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: _isMentor ? 'Specialisation' : 'Category',
+            icon: new Icon(
+              Icons.mail,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? _isMentor ? 'Specialisation can\'t be empty' : 'Category can\'t be empty' : null,
+        onSaved: (value) => _isMentor ? _specialisation=value.trim() : _category = value.trim(),
+      ),
+    );
+  }
+  
+  
 
   Widget showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -227,12 +346,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         child: new Text(
             _isLoginForm ? 'Create an account' : 'Have an account? Sign in',
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-        onPressed: toggleFormMode);
+        onPressed: toggleFormMode
+    );
   }
 
   Widget showPrimaryButton() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
           child: new RaisedButton(
@@ -242,8 +362,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             color: Colors.blue,
             child: new Text(_isLoginForm ? 'Login' : 'Create account',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: validateAndSubmit,
+            onPressed:() {
+               validateAndSubmit(); //submit to firebase
+            }, 
           ),
         ));
   }
 }
+
