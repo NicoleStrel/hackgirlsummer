@@ -1,5 +1,4 @@
-# INSERT NAME OF APP :iphone:
-
+![HaveHerBack Logo](haveherback_logo.svg)
 ## Inspiration
 Inspire me blah blah
 ## What it does
