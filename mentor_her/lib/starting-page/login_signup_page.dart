@@ -32,6 +32,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   bool _isLoginForm;
   bool _isLoading;
 
+  //dropdown
+  String _selectedCategory; 
+  List<String> _categories = ['A', 'B', 'C', 'D']; 
+
+
   // Check if form is valid before perform login or signup
   bool validateAndSave() {
     final form = _formKey.currentState;
@@ -257,7 +262,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         decoration: new InputDecoration(
             hintText: _isMentor ? 'First Name' : 'Company Name',
             icon: new Icon(
-              Icons.mail,
+              _isMentor ? IconData(59389, fontFamily: 'MaterialIcons'): IconData(59387, fontFamily: 'MaterialIcons'),
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? _isMentor ? 'First Name can\'t be empty' : 'Company name can\'t be empty' : null,
@@ -275,7 +280,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         decoration: new InputDecoration(
             hintText: _isMentor ? 'Last Name' : 'Short Description',
             icon: new Icon(
-              Icons.mail,
+              _isMentor ? IconData(59389, fontFamily: 'MaterialIcons'): IconData(57680, fontFamily: 'MaterialIcons'),
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? _isMentor ? 'Last Name can\'t be empty' : 'Description can\'t be empty' : null,
@@ -293,7 +298,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         decoration: new InputDecoration(
             hintText: 'Location',
             icon: new Icon(
-              Icons.mail,
+              IconData(58741, fontFamily: 'MaterialIcons'),
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? 'Location can\'t be empty' : null,
@@ -304,23 +309,48 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   Widget showCategoryInput(){
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-      child: new TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.text,
-        autofocus: false,
-        decoration: new InputDecoration(
-            hintText: _isMentor ? 'Specialisation' : 'Category',
-            icon: new Icon(
-              Icons.mail,
-              color: Colors.grey,
-            )),
-        validator: (value) => value.isEmpty ? _isMentor ? 'Specialisation can\'t be empty' : 'Category can\'t be empty' : null,
-        onSaved: (value) => _isMentor ? _specialisation=value.trim() : _category = value.trim(),
+      child: Stack(
+        children:<Widget>[
+          Container(
+            decoration: BoxDecoration( //need margin left to match
+                border: Border(bottom: BorderSide(color:Colors.grey)),
+            ),
+            padding: EdgeInsets.only(left: 44.0),
+            child: DropdownButton(
+              isExpanded: true,
+              autofocus: false,
+              items: _categories.map(
+                (val) {
+                  return DropdownMenuItem(
+                    value: val,
+                    child: Text(val),
+                  );
+                },
+              ).toList(),
+              value: _selectedCategory,
+              onChanged: (value) {
+                setState(() {
+                  _selectedCategory = value;
+                  _isMentor ? _specialisation=_selectedCategory : _category = _selectedCategory;
+                });
+              },
+            ),
+            
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: Icon(
+              IconData(58306, fontFamily: 'MaterialIcons'),
+              color: Colors.redAccent,
+              //size: 20.0,
+            ),
+          ),
+        ],
       ),
     );
   }
-  
-  
+  //need to add validator for dropdown menu:
+  //validator: (value) => value.isEmpty ? _isMentor ? 'Last Name can\'t be empty' : 'Description can\'t be empty' : null,
 
   Widget showPasswordInput() {
     return Padding(
