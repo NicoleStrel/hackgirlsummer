@@ -46,13 +46,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           ),
       ),
       Container(
-        child: 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Map(),
-            ],
-          ),
+        child: Map()
       )
     ]);
   }
