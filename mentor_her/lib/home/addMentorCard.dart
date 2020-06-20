@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../models/mentorModel.dart';
 
-class MentorCard extends StatefulWidget {
+class AddMentorCard extends StatefulWidget {
   final Mentor mentor;
-  MentorCard({this.mentor});
+  final String userId;
+  AddMentorCard({this.mentor, this.userId});
   @override
-  _MentorCardState createState() => _MentorCardState();
+  _AddMentorCardState createState() => _AddMentorCardState();
 }
 
-class _MentorCardState extends State<MentorCard> {
+class _AddMentorCardState extends State<AddMentorCard> {
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -28,6 +29,7 @@ class _MentorCardState extends State<MentorCard> {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             CircleAvatar(
               backgroundImage: NetworkImage(widget.mentor.imgUrl),
@@ -51,6 +53,19 @@ class _MentorCardState extends State<MentorCard> {
                     ) ,),
                 ],
               ),
+            ),
+            RawMaterialButton(
+              onPressed: () {
+                //TODO: Add updateOrganisation function to add Mentor
+              },
+              elevation: 2.0,
+              fillColor: Colors.red[200],
+              child: Icon(
+                Icons.add,
+                size: 15.0,
+              ),
+              padding: EdgeInsets.all(8.0),
+              shape: CircleBorder(),
             )
           ],
         )

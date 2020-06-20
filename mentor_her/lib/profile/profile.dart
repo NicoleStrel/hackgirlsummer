@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 const String page3 = "Profile";
 
 class Profile extends StatefulWidget {
+  final String userId;
+  Profile({this.userId});
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -21,7 +23,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.all(16.0),
         child: Center(
           child: FutureBuilder<Organisation>(
-            future: profileProvider.fetchOrganisation("manya@gmail.com"),
+            future: profileProvider.fetchOrganisationById(widget.userId),
             builder: (context, snapshot) {
               if(snapshot.hasData){
                 return Column(

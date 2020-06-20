@@ -12,6 +12,9 @@ class Api{
   Future<QuerySnapshot> getDataCollection(String path) {
     return _db.collection(path).getDocuments() ;
   }
+  Future<QuerySnapshot> getDataByEqualQuery(String path, String field, String value) {
+    return _db.collection(path).where(field, isEqualTo: value).getDocuments();
+  }
   Stream<QuerySnapshot> streamDataCollection(String path) {
     return _db.collection(path).snapshots() ;
   }
