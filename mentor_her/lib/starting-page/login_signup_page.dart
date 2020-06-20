@@ -54,7 +54,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       //_isLoading = true;
     });
     if (validateAndSave()) {
-      
+          //if new user:
+    
+      if (!_isLoginForm ){
+        createRecord();
+      }
       String userId = "";
       //createRecord();
       try {
@@ -81,11 +85,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         });
       }
     }
-    //if new user:
-    
-    if (!_isLoginForm ){
-        createRecord();
-    }
+
     
   }
 
