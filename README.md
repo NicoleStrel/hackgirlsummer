@@ -1,10 +1,19 @@
 ![HaveHerBack Logo](haveherback_logo.svg)
 ## Inspiration
-Inspire me blah blah
+Thirty years ago, there were approximately 4 million women-owned businesses in
+the United States. Today, there are more than 11 million women-owned businesses –
+representing 39 percent of all firms.While this trend is moving in the right direction, women-owned businesses still
+grow at a slower rate and earn less revenue than male-owned firms. In fact, women
+entrepreneurs face persistent institutional barriers that make achieving financial parity
+a serious challenge with lasting consequences. The consequences female entreprenuers face on a day-to-day basis inspired us to develop a mentorship and collaboration platform for women.
+
 ## What it does
-Lots of things blah blah blah
+
 ###### Mobile App
-It does blah blah blah 
+* allows opportunities for female entrepreneurs running Small& Medium Enterprises (SMEs) to connect & receive mentorship from industry experts on the platform.  
+* SMEs can also seek collaboration amongst themselves by connecting with firms that can cater to their needs. 
+* Provision of a collection of relevant news/announcements about special funding/support for women-run SMEs from the internet
+
 
 
 
