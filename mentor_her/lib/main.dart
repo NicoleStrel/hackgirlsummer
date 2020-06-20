@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'root_page.dart';
-import 'authentication.dart';
+import 'starting-page/root_page.dart';
+import 'starting-page/authentication.dart';
 //import 'app_loader.dart';
 
 void main() {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'authentication.dart';
+import 'starting-page/authentication.dart';
 //import 'package:firebase_database/firebase_database.dart';
 import 'home/home.dart';
-import 'info.dart';
-import 'profile.dart';
+import 'info/info.dart';
+import 'profile/profile.dart';
 
 //constants
 const String page1 = "Info";
