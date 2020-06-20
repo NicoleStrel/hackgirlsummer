@@ -12,7 +12,7 @@ class Mentors extends StatelessWidget {
         },
         child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
         color: Colors.red,
-        textColor: Colors.white,
+          textColor: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)),
 
