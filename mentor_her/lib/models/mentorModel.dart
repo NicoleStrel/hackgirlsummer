@@ -14,6 +14,7 @@ class Mentor {
       fname = snapshot['fname'] ?? '',
       lname = snapshot['lastname'] ?? '' ,
       specialisation = snapshot['specialisation'] ?? '',
+      location = snapshot['location'] ?? '',
       imgUrl = snapshot['imgUrl'] ?? '';
 
   toJson() {

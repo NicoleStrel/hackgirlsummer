@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:havemyback/CRUDModel.dart';
+import 'package:havemyback/models/CRUDModel.dart';
 import 'package:havemyback/locator.dart';
 import 'package:provider/provider.dart';
 import 'starting-page/root_page.dart';

@@ -1,29 +1,34 @@
-class Mentor {
+import 'mentorModel.dart';
+
+class Organisation {
   String id;
-  String fname;
-  String lname;
-  String specialisation;
+  String cname;
+  String category;
+  String desc;
   String imgUrl;
   String email;
   String location;
+  List<Mentor> mentors;
 
-  Mentor({this.id, this.fname, this.lname, this.specialisation, this.imgUrl, this.email, this.location});
+  Organisation({this.id, this.cname, this.category, this.desc, this.imgUrl, this.email, this.location, this.mentors});
 
-  Mentor.fromMap(Map snapshot, String id) :
+  Organisation.fromMap(Map snapshot, String id) :
       id = id ?? '',
-      fname = snapshot['fname'] ?? '',
-      lname = snapshot['lastname'] ?? '' ,
-      specialisation = snapshot['specialisation'] ?? '',
+      cname = snapshot['Cname'] ?? '',
+      category = snapshot['category'] ?? '',
+      desc = snapshot['desc'] ?? '',
+      email = snapshot['email'] ?? '',
+      location = snapshot['location'] ?? '',
       imgUrl = snapshot['imgUrl'] ?? '';
 
   toJson() {
     return{
-      "fname" : fname,
-      "lastname" : lname,
-      "specialisation" : specialisation,
+      "Cname" : cname,
+      "category" : category,
       "imgUrl" : imgUrl,
       "email" : email,
       "location" : location,
+      "desc" : desc,
     };
   }
 

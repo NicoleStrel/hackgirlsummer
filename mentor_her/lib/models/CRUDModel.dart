@@ -1,18 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:havemyback/models/mentorModel.dart';
-import 'locator.dart';
+import 'package:havemyback/models/organisationModel.dart';
+import '../locator.dart';
 
-import 'api.dart';
+import '../api.dart';
 
 class CRUDModel extends ChangeNotifier {
   Api _api = locator<Api>();
 
   List<Mentor> mentors;
-
+  List<Organisation> organisations;
+  List<Mentor> organisationMentors;
+  Organisation organisation;
 
   Future<List<Mentor>> fetchMentors() async {
-    var result = await _api.getDataCollection();
+    var result = await _api.getDataCollection('mentors');
     mentors = result.documents
         .map((doc) => Mentor.fromMap(doc.data, doc.documentID))
         .toList();
@@ -20,29 +23,45 @@ class CRUDModel extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot> fetchMentorsAsStream() {
-    return _api.streamDataCollection();
+    return _api.streamDataCollection('mentors');
   }
 
-  Future<Mentor> getProductById(String id) async {
-    var doc = await _api.getDocumentById(id);
+  Future<Mentor> getMentorById(String id) async {
+    var doc = await _api.getDocumentById('mentors',id);
     return  Mentor.fromMap(doc.data, doc.documentID) ;
   }
 
 
-  Future removeProduct(String id) async{
-    await _api.removeDocument(id) ;
+  Future removeMentor(String id) async{
+    await _api.removeDocument('mentors', id) ;
     return ;
   }
-  Future updateProduct(Mentor data,String id) async{
-    await _api.updateDocument(data.toJson(), id) ;
+  Future updateMentor(Mentor data,String id) async{
+    await _api.updateDocument('mentors', data.toJson(), id) ;
     return ;
   }
 
-  Future addProduct(Mentor data) async{
-    var result  = await _api.addDocument(data.toJson()) ;
+  Future addMentor(Mentor data) async{
+    var result  = await _api.addDocument('mentors' , data.toJson()) ;
     return ;
 
   }
+
+  Future<List<Organisation>> fetchOrganisations() async {
+    var result = await _api.getDataCollection('organisations');
+    organisations = result.documents
+        .map((doc) => Organisation.fromMap(doc.data, doc.documentID))
+        .toList();
+    return organisations;
+  }
+
+
+  Future<Organisation> fetchOrganisation(String id) async {
+    var result = await _api.getDocumentById('organisations',id);
+    return Organisation.fromMap(result.data, result.documentID);
+  }
+
+  
 
 
 }

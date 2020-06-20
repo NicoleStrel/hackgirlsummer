@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'mentorModel.dart';
+import '../models/mentorModel.dart';
 
 class MentorCard extends StatefulWidget {
   final Mentor mentor;
