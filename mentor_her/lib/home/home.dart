@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'mentors.dart';
+import 'map.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -40,9 +41,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'The mentor information goes here',
-              ),
+              Mentors(),
             ],
           ),
       ),
@@ -51,9 +50,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'The map goes here',
-              ),
+              Map(),
             ],
           ),
       )
