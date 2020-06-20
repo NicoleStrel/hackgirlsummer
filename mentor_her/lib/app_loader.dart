@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'authentication.dart';
+//import 'package:firebase_database/firebase_database.dart';
 import 'home/home.dart';
 import 'info.dart';
 import 'profile.dart';
@@ -8,16 +10,19 @@ const String page1 = "Info";
 const String page2 = "Home";
 const String page3 = "Profile";
 
-class MyAppLoader extends StatefulWidget {
-  MyAppLoader({Key key, this.title}) : super(key: key);
-
+class AppLoader extends StatefulWidget {
+  AppLoader({Key key, this.auth, this.userId, this.logoutCallback, this.title}) : super(key: key);
+  
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
   final String title;
 
   @override
-  _MyAppLoaderState createState() => _MyAppLoaderState();
+  _AppLoaderState createState() => _AppLoaderState();
 }
 
-class _MyAppLoaderState extends State<MyAppLoader> {
+class _AppLoaderState extends State<AppLoader> {
   List<Widget> _pages;
   Widget _page1;
   Widget _page2;

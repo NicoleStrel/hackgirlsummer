@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'login_signup_page.dart';
-import 'app_loader.dart';
+import 'root_page.dart';
+import 'authentication.dart';
+//import 'app_loader.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,8 +21,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.redAccent[200],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new MyAppLoader(),
-    );
+      home: new RootPage(auth: new Auth()));
   }
 }
 

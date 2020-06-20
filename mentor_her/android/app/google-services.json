@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "309536763899",
+    "firebase_url": "https://have-my-back.firebaseio.com",
+    "project_id": "have-my-back",
+    "storage_bucket": "have-my-back.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309536763899:android:a18674876245e24205255e",
+        "android_client_info": {
+          "package_name": "com.example.mentorher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309536763899-4ftou35kg69ajtgins14b4phltfmmqus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpkQh_UjPypUhkz2i06pJC-R4HJBg5vp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309536763899-4ftou35kg69ajtgins14b4phltfmmqus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
