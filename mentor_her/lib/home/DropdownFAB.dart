@@ -37,7 +37,7 @@ class _DropdownFABState extends State<DropdownFAB> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                    width: MediaQuery.of(context).size.width - 65,
+                    width: MediaQuery.of(context).size.width - 50,
                     child: Text(widget.text)
                 ),
               ],

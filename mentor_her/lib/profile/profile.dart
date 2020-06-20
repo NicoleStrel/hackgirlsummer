@@ -107,7 +107,7 @@ Widget _tabSection(BuildContext context) {
         ),
         Container(
           //Add this to give height
-          height: MediaQuery.of(context).size.height/2.5,
+          height: MediaQuery.of(context).size.height/3.5,
           child: TabBarView(children: [
             Scaffold(
               body: SingleChildScrollView(
