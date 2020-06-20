@@ -1,5 +1,3 @@
-import 'mentorModel.dart';
-
 class Organisation {
   String id;
   String cname;
@@ -8,7 +6,7 @@ class Organisation {
   String imgUrl;
   String email;
   String location;
-  List<Mentor> mentors;
+  List<String> mentors;
 
   Organisation({this.id, this.cname, this.category, this.desc, this.imgUrl, this.email, this.location, this.mentors});
 
@@ -19,6 +17,7 @@ class Organisation {
       desc = snapshot['desc'] ?? '',
       email = snapshot['email'] ?? '',
       location = snapshot['location'] ?? '',
+      mentors = List.from(snapshot['mentors']) ?? '',
       imgUrl = snapshot['imgUrl'] ?? '';
 
   toJson() {
@@ -29,6 +28,7 @@ class Organisation {
       "email" : email,
       "location" : location,
       "desc" : desc,
+      "mentors": mentors,
     };
   }
 

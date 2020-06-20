@@ -11,12 +11,13 @@ const String page2 = "Home";
 const String page3 = "Profile";
 
 class AppLoader extends StatefulWidget {
-  AppLoader({Key key, this.auth, this.userId, this.logoutCallback, this.title}) : super(key: key);
+  AppLoader({Key key, this.auth, this.userId, this.logoutCallback, this.title, this.email}) : super(key: key);
   
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;
   final String title;
+  final String email;
 
   @override
   _AppLoaderState createState() => _AppLoaderState();
@@ -34,10 +35,9 @@ class _AppLoaderState extends State<AppLoader> {
   @override
   void initState() {
     super.initState();
-
     _page1 = Info();
-    _page2 = Home();
-    _page3 = Profile(userId: widget.userId,);
+    _page2 = Home(userId: widget.email);
+    _page3 = Profile(userId: widget.email,);
 
     _pages = [_page1, _page2, _page3];
 

@@ -3,6 +3,8 @@ import 'mentors.dart';
 import 'map.dart';
 
 class Home extends StatefulWidget {
+  final String userId;
+  Home({this.userId});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -41,7 +43,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Mentors(),
+              Mentors(userId: widget.userId),
             ],
           ),
       ),

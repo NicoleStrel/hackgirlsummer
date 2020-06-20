@@ -22,6 +22,14 @@ class CRUDModel extends ChangeNotifier {
     return mentors;
   }
 
+  Future<List<Mentor>> fetchMentorsBySpecialisation(String specialisation) async {
+    var result = await _api.getDataByEqualQuery('mentors', 'specialisation', specialisation);
+    mentors = result.documents
+        .map((doc) => Mentor.fromMap(doc.data, doc.documentID))
+        .toList();
+    return mentors;
+  }
+
   Stream<QuerySnapshot> fetchMentorsAsStream() {
     return _api.streamDataCollection('mentors');
   }
@@ -55,13 +63,29 @@ class CRUDModel extends ChangeNotifier {
     return organisations;
   }
 
-
-  Future<Organisation> fetchOrganisation(String id) async {
+  Future<Organisation> fetchOrganisationById(String id) async {
     var result = await _api.getDocumentById('organisations',id);
     return Organisation.fromMap(result.data, result.documentID);
-  }
+}
 
-  
+//  Future<List<Mentor>> fetchOrganisationMentors(String id) async {
+//    var result = await _api.getDocumentById('organisations',id);
+//    organisation =  Organisation.fromMap(result.data, result.documentID);
+//    List<String> mentorIds = organisation.mentors;
+//    for(var id in mentorIds){
+//      Mentor mentor = await getMentorById(id);
+//      print(mentor);
+//      organisationMentors.add(mentor);
+//    }
+//    for ( var id in mentorIds){
+//      Mentor mentor = await getMentorById(id);
+//      print("mentor");
+//      print(mentor);
+//    }
+//    print("mentors:");
+//    print(organisationMentors);
+//    return organisationMentors;
+//  }
 
 
 }

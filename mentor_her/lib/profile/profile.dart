@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.all(16.0),
         child: Center(
           child: FutureBuilder<Organisation>(
-            future: profileProvider.fetchOrganisation(widget.userId),
+            future: profileProvider.fetchOrganisationById(widget.userId),
             builder: (context, snapshot) {
               if(snapshot.hasData){
                 return Column(

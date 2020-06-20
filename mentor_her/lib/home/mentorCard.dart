@@ -39,7 +39,7 @@ class _MentorCardState extends State<MentorCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(widget.mentor.fname + " " + widget.mentor.lname,
+                  Text(widget.mentor.fname + " " + widget.mentor.lastname,
                     style: TextStyle(
                       fontSize: 18,
                     ),
