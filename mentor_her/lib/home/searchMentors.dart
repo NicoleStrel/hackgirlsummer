@@ -5,7 +5,11 @@ import 'package:havemyback/models/CRUDModel.dart';
 import 'package:havemyback/models/mentorModel.dart';
 import 'package:provider/provider.dart';
 
+import 'addMentorCard.dart';
+
 class SearchMentors extends StatefulWidget {
+  final String userId;
+  SearchMentors({this.userId});
   @override
   _SearchMentorsState createState() => _SearchMentorsState();
 }
@@ -79,7 +83,7 @@ class _SearchMentorsState extends State<SearchMentors> {
                         return ListView.builder(
                           itemCount: mentors.length,
                           itemBuilder: (buildContext, index) =>
-                              MentorCard(mentor: mentors[index]),
+                              AddMentorCard(mentor: mentors[index], userId: widget.userId,),
                         );
                       } else {
                         return CircularProgressIndicator();

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:havemyback/home/addMentorCard.dart';
 import 'package:havemyback/home/searchMentors.dart';
 import 'package:havemyback/models/CRUDModel.dart';
 import 'package:havemyback/models/mentorModel.dart';
@@ -29,7 +30,7 @@ class _MentorsState extends State<Mentors> {
             builder: (context, AsyncSnapshot<Organisation> snapshot){
               if(snapshot.hasData){
                 return Scaffold(
-                  floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context), label: Text("Search Mentors"), icon: Icon(Icons.search),),
+                  floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context, widget.userId), label: Text("Search Mentors"), icon: Icon(Icons.search),),
                   body: ListView.builder(
                       itemCount: snapshot.data.mentors.length,
                       itemBuilder: (buildContext, index) =>
@@ -38,7 +39,7 @@ class _MentorsState extends State<Mentors> {
                             builder: (buildContext, AsyncSnapshot<Mentor> snapshot){
                               if(snapshot.hasData)
                                 {
-                                  return MentorCard(mentor: snapshot.data,);
+                                  return MentorCard(mentor: snapshot.data);
                                 }
                               else{
                                 return CircularProgressIndicator();
@@ -51,7 +52,7 @@ class _MentorsState extends State<Mentors> {
                 return Center(
                   child: RaisedButton(
                     onPressed: (){
-                      navigateToSubPage(context);
+                      navigateToSubPage(context, widget.userId);
                     },
                     child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
                     color: Colors.red,
@@ -68,7 +69,7 @@ class _MentorsState extends State<Mentors> {
   }
 }
 
-Future navigateToSubPage(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchMentors()));
+Future navigateToSubPage(context,id) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchMentors(userId: id)));
 }
 
