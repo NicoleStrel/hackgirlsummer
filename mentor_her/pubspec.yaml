@@ -31,7 +31,6 @@ dependencies:
   geolocator: ^5.3.2+2
   cloud_firestore: ^0.13.7
   permission_handler: ^4.4.0+hotfix.2
-  cloud_firestore: ^0.13.7
   provider: ^3.0.0+1
   get_it: ^1.0.3+2
 
