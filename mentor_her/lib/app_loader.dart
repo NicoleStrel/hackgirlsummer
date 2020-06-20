@@ -37,7 +37,7 @@ class _AppLoaderState extends State<AppLoader> {
 
     _page1 = Info();
     _page2 = Home();
-    _page3 = Profile();
+    _page3 = Profile(userId: widget.userId,);
 
     _pages = [_page1, _page2, _page3];
 

@@ -13,7 +13,7 @@ class AllMentors extends StatefulWidget {
   _AllMentorsState createState() => _AllMentorsState();
 }
 
-class _AllMentorsState extends State<Mentors> {
+class _AllMentorsState extends State<AllMentors> {
 
   List<Mentor> mentors;
   @override

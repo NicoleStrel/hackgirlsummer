@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class Mentors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: RaisedButton(
         onPressed: (){
-          print('you clicked me');
           navigateToSubPage(context);
         },
         child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
@@ -15,7 +13,6 @@ class Mentors extends StatelessWidget {
           textColor: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)),
-
       ),
     );
 
@@ -25,15 +22,6 @@ class Mentors extends StatelessWidget {
   }
 }
 
-void mentor() {
-
-  runApp(
-      MaterialApp(
-        title: "Stateful",
-        home: Subpage(),
-      )
-  );
-}
 
 class Subpage extends StatefulWidget {
 
