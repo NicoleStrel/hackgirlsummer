@@ -31,6 +31,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   bool _isMentor;
   bool _isLoginForm;
   bool _isLoading;
+  bool _registration;
 
   //dropdown
   String _selectedCategory; 
@@ -97,6 +98,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     _isLoading = false;
     _isLoginForm = true;
     _isMentor =false;
+    _registration = false;
     super.initState();
   }
 
@@ -128,6 +130,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           'location': _location,
           'specialisation': _specialisation,
         });
+      setState(() {
+        _registration = true;
+      });
     }
     else{
         await databaseReference.collection("organisations")
@@ -139,6 +144,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           'location': _location,
           'category': _category,
           'mentors': FieldValue.arrayUnion([""]),
+        });
+        setState(() {
+          _registration = true;
         });
     }
   }
@@ -192,11 +200,31 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               showPrimaryButton(),
               showSecondaryButton(),
               showErrorMessage(),
+              showMessage()
             ],
               
           ),
         ));
   }
+
+  Widget showMessage() {
+    if (_registration) {
+      return new Text(
+        "User created Successfully!",
+        style: TextStyle(
+            fontSize: 13.0,
+            color: Colors.lightGreen,
+            height: 1.0,
+            fontWeight: FontWeight.w300),
+      );
+    } else {
+      return new Container(
+        height: 0.0,
+      );
+    }
+  }
+
+
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return new Text(
