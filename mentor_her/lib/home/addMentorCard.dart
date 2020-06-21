@@ -61,10 +61,16 @@ class _AddMentorCardState extends State<AddMentorCard> {
             RawMaterialButton(
               onPressed: () async {
                 //TODO: Add updateOrganisation function to add Mentor
-                widget.current.mentors.add(widget.mentor.id);
+                bool exists = false;
+                for(String id in widget.current.mentors){
+                  if (id == widget.mentor.id) {
+                    exists = true;
+                  }
+                }
+                if(!exists) widget.current.mentors.add(widget.mentor.id);
                 await Provider.of<CRUDModel>(context).updateOrganisation(widget.current, widget.userId);
                 Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text('Mentor Request Sent'),
+                  content: exists ? Text("Mentor already exists") : Text('Mentor Request Sent'),
                   duration: Duration(seconds: 3),
                 ));
               },

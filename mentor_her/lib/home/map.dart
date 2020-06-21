@@ -68,22 +68,25 @@ class _MapState extends State<Map> {
       int i = 0;
       for(final position in markLocations){
         final marker = Marker (
-          markerId: MarkerId(position.toString()),
+          markerId: MarkerId(organisations[i].cname),
           position: position,
           icon: icon,
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id:organisations[i].id, org: organisations[i],)));
+          },
           infoWindow: InfoWindow(
             title: organisations[i]?.cname,
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id: organisations.elementAt(i).id)));
+//              Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id: organisations.elementAt(i).id)));
             }
           )
         );
         i = i+1;
         _markers.add(marker);
       }
+      i = 0;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +148,7 @@ class _MapState extends State<Map> {
                           i = i + 1;
                           _markers.add(marker);
                         }
+                        i = 0;
                       });
                     },
                     values: categories, 
