@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:havemyback/models/CRUDModel.dart';
+import 'package:havemyback/models/organisationModel.dart';
+import 'package:provider/provider.dart';
 
 import '../models/mentorModel.dart';
 
 class AddMentorCard extends StatefulWidget {
   final Mentor mentor;
   final String userId;
-  AddMentorCard({this.mentor, this.userId});
+  final Organisation current;
+  AddMentorCard({this.mentor, this.userId, this.current});
   @override
   _AddMentorCardState createState() => _AddMentorCardState();
 }
@@ -55,8 +59,14 @@ class _AddMentorCardState extends State<AddMentorCard> {
               ),
             ),
             RawMaterialButton(
-              onPressed: () {
+              onPressed: () async {
                 //TODO: Add updateOrganisation function to add Mentor
+                widget.current.mentors.add(widget.mentor.id);
+                await Provider.of<CRUDModel>(context).updateOrganisation(widget.current, widget.userId);
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text('Mentor Request Sent'),
+                  duration: Duration(seconds: 3),
+                ));
               },
               elevation: 2.0,
               fillColor: Colors.red[200],

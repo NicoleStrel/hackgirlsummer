@@ -123,4 +123,9 @@ class CRUDModel extends ChangeNotifier {
   }
   */
 
+  Future updateOrganisation(Organisation data,String id) async{
+    await _api.updateDocument('organisations', data.toJson(), id) ;
+    return ;
+  }
+
 }

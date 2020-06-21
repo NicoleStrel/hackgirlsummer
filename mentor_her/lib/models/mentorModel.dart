@@ -6,6 +6,7 @@ class Mentor {
   String imgUrl;
   String email;
   String location;
+//  List<String> organisations;
 
   Mentor({this.id, this.fname, this.lastname, this.specialisation, this.imgUrl, this.email, this.location});
 
@@ -15,6 +16,7 @@ class Mentor {
       lastname = snapshot['lastname'] ?? '' ,
       specialisation = snapshot['specialisation'] ?? '',
       location = snapshot['location'] ?? '',
+//      organisations = List.from(snapshot['organisations']) ?? [],
       imgUrl = snapshot['imgUrl'] ?? '';
 
   toJson() {
@@ -24,6 +26,7 @@ class Mentor {
       "specialisation" : specialisation,
       "email" : email,
       "location" : location,
+//      "organisations" : organisations,
       "imgUrl": "",
     };
   }
