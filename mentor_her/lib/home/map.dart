@@ -139,7 +139,7 @@ class _MapState extends State<Map> {
                               position: position,
                               icon: icon,
                               infoWindow: InfoWindow(
-                                  title: position.toString(),
+                                  title: categoryOrgs[i].cname,
                                   onTap: (){
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id: categoryOrgs.elementAt(i).id)));
                                   }

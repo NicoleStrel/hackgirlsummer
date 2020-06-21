@@ -29,7 +29,8 @@ class _MentorsState extends State<Mentors> {
             future: mentorProvider.fetchOrganisationById(widget.userId),
             builder: (context, AsyncSnapshot<Organisation> snapshot){
               Organisation current = snapshot.data;
-              if(snapshot.hasData && snapshot.data.mentors != null){
+              if(snapshot.hasData && snapshot.data.mentors[0] != ""){
+                print(snapshot.data.mentors.length);
                 return Scaffold(
                   floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context, widget.userId,current), label: Text("Search Mentors"), icon: Icon(Icons.search),),
                   body: ListView.builder(

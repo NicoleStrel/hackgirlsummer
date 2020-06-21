@@ -128,6 +128,10 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           'location': _location,
           'specialisation': _specialisation,
         });
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Mentor Profile created successfully"),
+        duration: Duration(seconds: 3),
+      ));
     }
     else{
         await databaseReference.collection("organisations")
@@ -140,6 +144,10 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           'category': _category,
           'mentors': FieldValue.arrayUnion([""]),
         });
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Company Profile created successfully"),
+          duration: Duration(seconds: 3),
+        ));
     }
   }
 

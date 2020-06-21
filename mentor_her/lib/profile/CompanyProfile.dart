@@ -123,7 +123,22 @@ Widget _tabSection(BuildContext context) {
               ),
             ),
             Scaffold(
-              body: Text("Events"),
+              body:SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    ListCard(
+                      name: "Event A",
+                      description: "Workshop for xyz stuff ",
+                      imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
+                    ),
+                    ListCard(
+                      name: "Event B",
+                      description: "Talk at local community event",
+                      imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
+                    ),
+                  ],
+                ),
+              ),
             ),
           ]),
         ),
