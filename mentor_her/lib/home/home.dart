@@ -50,23 +50,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         if(snapshot.hasData){
         return Center(
         child: snapshot.data ? 
-            Center(
-              child: Column(
-                children: <Widget>[
-                  new Image.asset("asset/undraw_remote_team_h93l.png", height: 200),
-                  Text('Search for Organisations to Mentor!'),
-                  RaisedButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Map()));
-                    },
-                    child: Text('Search Organisations',style: TextStyle(fontSize: 20 )),
-                    color: Colors.red,
-                    textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                ],
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Image.asset("asset/undraw_remote_team_h93l.png", height: 200),
+                Text('Search for Organisations to Mentor!'),
+                RaisedButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Map()));
+                  },
+                  child: Text('Search Organisations',style: TextStyle(fontSize: 20 )),
+                  color: Colors.red,
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+              ],
             )
             : Column(
           mainAxisAlignment: MainAxisAlignment.center,
