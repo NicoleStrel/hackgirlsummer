@@ -28,9 +28,10 @@ class _MentorsState extends State<Mentors> {
           child: FutureBuilder(
             future: mentorProvider.fetchOrganisationById(widget.userId),
             builder: (context, AsyncSnapshot<Organisation> snapshot){
+              Organisation current = snapshot.data;
               if(snapshot.hasData && snapshot.data.mentors != null){
                 return Scaffold(
-                  floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context, widget.userId), label: Text("Search Mentors"), icon: Icon(Icons.search),),
+                  floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context, widget.userId,current), label: Text("Search Mentors"), icon: Icon(Icons.search),),
                   body: ListView.builder(
                       itemCount: snapshot.data.mentors.length,
                       itemBuilder: (buildContext, index) =>
@@ -56,7 +57,7 @@ class _MentorsState extends State<Mentors> {
                       Container(child: Text('You haven’t connected with mentors yet, find one today that helps you grow!'), width: MediaQuery.of(context).size.width-100,),
                       RaisedButton(
                         onPressed: (){
-                          navigateToSubPage(context, widget.userId);
+                          navigateToSubPage(context, widget.userId, current);
                         },
                         child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
                         color: Colors.red,
@@ -75,7 +76,7 @@ class _MentorsState extends State<Mentors> {
   }
 }
 
-Future navigateToSubPage(context,id) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchMentors(userId: id)));
+Future navigateToSubPage(context,id, current) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchMentors(userId: id, current:current)));
 }
 
