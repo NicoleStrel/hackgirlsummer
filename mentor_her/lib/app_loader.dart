@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'starting-page/authentication.dart';
 //import 'package:firebase_database/firebase_database.dart';
 import 'home/home.dart';
-import 'info/info.dart';
+import 'awards/awards.dart';
 import 'profile/profile.dart';
 
 //constants
@@ -35,7 +35,7 @@ class _AppLoaderState extends State<AppLoader> {
   @override
   void initState() {
     super.initState();
-    _page1 = Info();
+    _page1 = Award();
     _page2 = Home(userId: widget.email);
     _page3 = Profile(userId: widget.email,);
 
