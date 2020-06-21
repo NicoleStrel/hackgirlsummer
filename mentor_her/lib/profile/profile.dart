@@ -26,6 +26,7 @@ class _ProfileState extends State<Profile> {
         child:FutureBuilder<bool>(
           future: collectionProvider.determineIfMentor((widget.userId)),
           builder: (context, snapshot) {
+            print(snapshot.data);
             if(snapshot.hasData){
               return Center(
                 child: snapshot.data ? _mentorPersonal(context): _orgPersonal(context),
@@ -114,6 +115,7 @@ class _ProfileState extends State<Profile> {
     return FutureBuilder<Mentor>(
       future: profileProvider.getMentorById(widget.userId),
       builder: (context, snapshot) {
+        print(snapshot.data);
         if(snapshot.hasData){
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -198,7 +200,7 @@ Widget _tabSectionForOrg(BuildContext context) {
         ),
         Container(
           //Add this to give height
-          height: MediaQuery.of(context).size.height/3.5,
+          height: MediaQuery.of(context).size.height/2.6,
           child: TabBarView(children: [
             Scaffold(
               body: SingleChildScrollView(
@@ -287,7 +289,7 @@ Widget _tabSectionForMentor(BuildContext context) {
         ),
         Container(
           //Add this to give height
-          height: MediaQuery.of(context).size.height/3.5,
+          height: MediaQuery.of(context).size.height/2.6,
           child: TabBarView(children: [
             Scaffold(
               body: SingleChildScrollView(

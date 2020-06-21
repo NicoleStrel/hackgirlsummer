@@ -70,6 +70,15 @@ class CRUDModel extends ChangeNotifier {
     return Organisation.fromMap(result.data, result.documentID);
   }
 
+  Future<List<Organisation>> fetchOrganisationsByCategory(String specialisation) async {
+    var result = await _api.getDataByEqualQuery('organisations', 'category', specialisation);
+    organisations = result.documents
+        .map((doc) => Organisation.fromMap(doc.data, doc.documentID))
+        .toList();
+    return organisations;
+  }
+
+
 //  Future<List<Mentor>> fetchOrganisationMentors(String id) async {
 //    var result = await _api.getDocumentById('organisations',id);
 //    organisation =  Organisation.fromMap(result.data, result.documentID);

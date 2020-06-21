@@ -28,7 +28,7 @@ class _MentorsState extends State<Mentors> {
           child: FutureBuilder(
             future: mentorProvider.fetchOrganisationById(widget.userId),
             builder: (context, AsyncSnapshot<Organisation> snapshot){
-              if(snapshot.hasData){
+              if(snapshot.hasData && snapshot.data.mentors != null){
                 return Scaffold(
                   floatingActionButton: FloatingActionButton.extended(onPressed: ()=>navigateToSubPage(context, widget.userId), label: Text("Search Mentors"), icon: Icon(Icons.search),),
                   body: ListView.builder(
@@ -42,7 +42,7 @@ class _MentorsState extends State<Mentors> {
                                   return MentorCard(mentor: snapshot.data);
                                 }
                               else{
-                                return CircularProgressIndicator();
+                                return Center(child: CircularProgressIndicator());
                               }
                             },
                           )
@@ -50,15 +50,21 @@ class _MentorsState extends State<Mentors> {
                 );
             } else {
                 return Center(
-                  child: RaisedButton(
-                    onPressed: (){
-                      navigateToSubPage(context, widget.userId);
-                    },
-                    child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
-                    color: Colors.red,
-                    textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset("../assets/undraw_team_spirit_hrr4", height: MediaQuery.of(context).size.height/3,),
+                      Container(child: Text('You haven’t connected with mentors yet, find one today that helps you grow!'), width: MediaQuery.of(context).size.width-100,),
+                      RaisedButton(
+                        onPressed: (){
+                          navigateToSubPage(context, widget.userId);
+                        },
+                        child: Text('Find Mentors',style: TextStyle(fontSize: 20 )),
+                        color: Colors.red,
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ],
                   ),
                 );
               }
