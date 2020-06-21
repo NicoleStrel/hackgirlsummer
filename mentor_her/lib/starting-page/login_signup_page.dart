@@ -35,6 +35,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   //dropdown
   String _selectedCategory; 
   List<String> _categories = ['Creative', 'Technology','Digital Marketing', 'Consulting', 'Tax Preparation', 'Public Relations'];
+  List<String> _specialities = ['Finance', 'Technology', 'Marketing', 'Human Resources', 'Entrepreneurship'];
 
 
 
@@ -335,7 +336,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                 hint: Text(
                   _isMentor ? 'Specialisation':'Category',
                 ),
-                items:
+                items: _isMentor ?
+                    _specialities.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList() :
                   _categories.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

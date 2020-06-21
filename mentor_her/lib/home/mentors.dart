@@ -53,7 +53,7 @@ class _MentorsState extends State<Mentors> {
                 return Center(
                   child: Column(
                     children: <Widget>[
-                      Image.asset("../assets/undraw_team_spirit_hrr4", height: MediaQuery.of(context).size.height/3,),
+                      Image.asset("assets/undraw_team_spirit_hrr4.png", height: MediaQuery.of(context).size.height/3,),
                       Container(child: Text('You haven’t connected with mentors yet, find one today that helps you grow!'), width: MediaQuery.of(context).size.width-100,),
                       RaisedButton(
                         onPressed: (){

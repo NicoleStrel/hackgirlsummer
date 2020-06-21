@@ -121,7 +121,7 @@ Widget _level(level){
 //------------------achievement list---------
 Widget _achievmentList(List<String> awards, List<String> awardsTitles, List <String> urls){
   return Container(
-    height:300,
+    height:400,
     child:Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -140,25 +140,4 @@ Widget _achievmentList(List<String> awards, List<String> awardsTitles, List <Str
   );
       
 }
-/*children: <Widget>[
-              ListCard(
-                name: "Jane Doe",
-                description: "Founder",
-                imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
-              ),
-              ListCard(
-                name: "John Doe",
-                description: "Manager",
-                imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
-              ),
-              ListCard(
-                name: "John Doe",
-                description: "Manager",
-                imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
-              ),
-              ListCard(
-                name: "John Doe",
-                description: "Manager",
-                imageUrl: "https://www.iconspng.com/images/female-avatar-3/female-avatar-3.jpg",
-              ),
-            ],*/
+
