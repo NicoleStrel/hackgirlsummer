@@ -17,7 +17,7 @@ class Organisation {
       desc = snapshot['desc'] ?? '',
       email = snapshot['email'] ?? '',
       location = snapshot['location'] ?? '',
-      mentors = List.from(snapshot['mentors']) ?? '',
+      //mentors = List.from(snapshot['mentors']) ?? '',
       imgUrl = snapshot['imgUrl'] ?? '';
 
   toJson() {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:havemyback/models/mentorModel.dart';
@@ -66,7 +68,7 @@ class CRUDModel extends ChangeNotifier {
   Future<Organisation> fetchOrganisationById(String id) async {
     var result = await _api.getDocumentById('organisations',id);
     return Organisation.fromMap(result.data, result.documentID);
-}
+  }
 
 //  Future<List<Mentor>> fetchOrganisationMentors(String id) async {
 //    var result = await _api.getDocumentById('organisations',id);
@@ -87,5 +89,21 @@ class CRUDModel extends ChangeNotifier {
 //    return organisationMentors;
 //  }
 
+  Future<bool> determineIfMentor(String id) async{
+    //check if mentor
+    var result = await _api.getDataCollection('mentors');
+    mentors = result.documents
+        .map((doc) => Mentor.fromMap(doc.data, doc.documentID))
+        .toList();
+    for (var m in mentors){
+      if(m.id==id){
+        print('A mentor');
+        return true;
+      }
+    }
+    print('An org');
+    return false; //org
+
+  }
 
 }
