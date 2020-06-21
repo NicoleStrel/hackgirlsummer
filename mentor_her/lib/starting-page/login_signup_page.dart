@@ -34,7 +34,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   //dropdown
   String _selectedCategory; 
-  List<String> _categories = ['A', 'B', 'C', 'D']; 
+  List<String> _categories = ['Creative', 'Technology','Digital Marketing', 'Consulting', 'Tax Preparation', 'Public Relations'];
 
 
   // Check if form is valid before perform login or signup

@@ -24,6 +24,7 @@ class Mentor {
       "specialisation" : specialisation,
       "email" : email,
       "location" : location,
+      "imgUrl": "",
     };
   }
 

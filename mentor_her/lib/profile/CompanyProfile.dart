@@ -14,73 +14,78 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.arrow_back_ios),
-                ],
-              ),
-              SizedBox(height: 25,),
-              CircleAvatar(
-                backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
-                maxRadius: 65,
-              ),
-              SizedBox(height: 15,),
-              Text("Company Name",
-                  style: TextStyle(
-                    fontSize: 18,
-                  )),
-              SizedBox(height:5),
-              Text("Company description",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ) ,),
-              SizedBox(height: 5,),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 6,vertical:2),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.red[200],
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+      child: Scaffold(
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    InkWell(child: Icon(Icons.arrow_back_ios), onTap: (){
+                      //todo:go back
+                      Navigator.pop(context);
+                    },),
+                  ],
                 ),
-                child: Text("Technology"),
-              ),
-              SizedBox(height: 5,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.location_on),
-                  Text("Location",
+                SizedBox(height: 25,),
+                CircleAvatar(
+                  backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
+                  maxRadius: 65,
+                ),
+                SizedBox(height: 15,),
+                Text("Company Name",
                     style: TextStyle(
-                      fontSize: 10,
-                    ),
+                      fontSize: 18,
+                    )),
+                SizedBox(height:5),
+                Text("Company description",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ) ,),
+                SizedBox(height: 5,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6,vertical:2),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.red[200],
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
-                ],
-              ),
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton.icon(onPressed: (){}, icon: Icon(Icons.add), label:Text("Follow")),
-                  SizedBox(width: 15,),
-                  RaisedButton.icon(onPressed: (){}, icon: Icon(Icons.people), label:Text("Collaborate")),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  _tabSection(context),
-                ],
-              )
-            ],
+                  child: Text("Technology"),
+                ),
+                SizedBox(height: 5,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.location_on),
+                    Text("Location",
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton.icon(onPressed: (){}, icon: Icon(Icons.add), label:Text("Follow")),
+                    SizedBox(width: 15,),
+                    RaisedButton.icon(onPressed: (){}, icon: Icon(Icons.people), label:Text("Collaborate")),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    _tabSection(context),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
