@@ -141,7 +141,7 @@ class _MapState extends State<Map> {
                               infoWindow: InfoWindow(
                                   title: categoryOrgs[i].cname,
                                   onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id: categoryOrgs.elementAt(i).id)));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyProfile(id: categoryOrgs.elementAt(0).id)));
                                   }
                               )
                           );
