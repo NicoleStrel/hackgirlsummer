@@ -30,6 +30,11 @@ class Api{
   Future<void> updateDocument(String path, Map data , String id) {
     return _db.collection(path).document(id).updateData(data) ;
   }
-
+  Future<DocumentReference> addExperiencestoDocument(String path,String id) {
+    return _db.collection(path).document(id).updateData({
+      "experiences.tiles":  FieldValue.arrayUnion([]),
+      "experiences.descs":FieldValue.arrayUnion([]),
+    });
+  }
 
 }

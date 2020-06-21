@@ -34,7 +34,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   //dropdown
   String _selectedCategory; 
-  List<String> _categories = ['A', 'B', 'C', 'D']; 
+  List<String> _categories = ['Finance', 'Technology', 'Marketing', 'Human Resources', 'Entrepreneurship']; 
 
 
   // Check if form is valid before perform login or signup
@@ -136,6 +136,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           'email': _email,
           'location': _location,
           'category': _category,
+          'mentors': FieldValue.arrayUnion([""]),
         });
     }
   }
@@ -225,12 +226,22 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
   Widget showProfileChoice(){
-      return new FlatButton(
-        child: new Text(
-            _isMentor ? 'Account Type: Mentor' : 'Account Type: Company',
-            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-        onPressed: toggleAccountMode
-    );
+      return new Container(
+        margin: new EdgeInsets.only(left: 70.0,right: 70.0, top:5.0),
+
+        child:new FlatButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: BorderSide(color: Colors.red[400])
+            ),
+            padding: EdgeInsets.only(left:2, right:2, top:5, bottom:5),
+            textColor: Colors.black,
+            child: new Text(
+                _isMentor ? 'Account Type: Mentor' : 'Account Type: Company',
+                style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300, color: Colors.red[400])),
+            onPressed: toggleAccountMode
+          )
+      );
   }
 
   Widget showEmailInput() {
@@ -244,7 +255,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Email',
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: Colors.red[200],
             )),
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
         onSaved: (value) => _email = value.trim(),
@@ -263,7 +274,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: _isMentor ? 'First Name' : 'Company Name',
             icon: new Icon(
               _isMentor ? IconData(59389, fontFamily: 'MaterialIcons'): IconData(59387, fontFamily: 'MaterialIcons'),
-              color: Colors.grey,
+              color: Colors.red[200],
             )),
         validator: (value) => value.isEmpty ? _isMentor ? 'First Name can\'t be empty' : 'Company name can\'t be empty' : null,
         onSaved: (value) => _isMentor ? _fname=value.trim() : _cname = value.trim(),
@@ -281,7 +292,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: _isMentor ? 'Last Name' : 'Short Description',
             icon: new Icon(
               _isMentor ? IconData(59389, fontFamily: 'MaterialIcons'): IconData(57680, fontFamily: 'MaterialIcons'),
-              color: Colors.grey,
+              color: Colors.red[200],
             )),
         validator: (value) => value.isEmpty ? _isMentor ? 'Last Name can\'t be empty' : 'Description can\'t be empty' : null,
         onSaved: (value) => _isMentor ? _lastname=value.trim() : _desc = value.trim(),
@@ -299,7 +310,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Location',
             icon: new Icon(
               IconData(58741, fontFamily: 'MaterialIcons'),
-              color: Colors.grey,
+              color: Colors.red[200],
             )),
         validator: (value) => value.isEmpty ? 'Location can\'t be empty' : null,
         onSaved: (value) =>  _location = value.trim(),
@@ -312,36 +323,40 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       child: Stack(
         children:<Widget>[
           Container(
-            decoration: BoxDecoration( //need margin left to match
+            padding: EdgeInsets.only(left: 40.0),
+            child: new Container(
+              decoration: BoxDecoration( //need margin left to match
                 border: Border(bottom: BorderSide(color:Colors.grey)),
-            ),
-            padding: EdgeInsets.only(left: 44.0),
-            child: DropdownButton(
-              isExpanded: true,
-              autofocus: false,
-              items: _categories.map(
-                (val) {
-                  return DropdownMenuItem(
-                    value: val,
-                    child: Text(val),
+              ),
+              padding: new EdgeInsets.only(top: 3),
+              child:DropdownButtonFormField<String>(
+                isExpanded: true,
+                hint: Text(
+                  _isMentor ? 'Specialisation':'Category',
+                ),
+                items:
+                  _categories.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
                   );
-                },
-              ).toList(),
-              value: _selectedCategory,
-              onChanged: (value) {
-                setState(() {
-                  _selectedCategory = value;
-                  _isMentor ? _specialisation=_selectedCategory : _category = _selectedCategory;
-                });
-              },
+                }).toList(),
+                value: _selectedCategory,
+                onChanged: (value) =>
+                  setState(() => {
+                    _selectedCategory = value,
+                    _specialisation=_selectedCategory,
+                    _category = _selectedCategory,
+                }),
+                validator: (value) => value == null ? _isMentor ? 'Specialisation can\'t be empty' : 'Category can\'t be empty' : null,
+              )
             ),
-            
           ),
           Container(
             margin: EdgeInsets.only(top: 10.0),
             child: Icon(
               IconData(58306, fontFamily: 'MaterialIcons'),
-              color: Colors.redAccent,
+              color: Colors.red[200],
               //size: 20.0,
             ),
           ),
@@ -349,9 +364,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
-  //need to add validator for dropdown menu:
-  //validator: (value) => value.isEmpty ? _isMentor ? 'Last Name can\'t be empty' : 'Description can\'t be empty' : null,
-
+ 
   Widget showPasswordInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
@@ -363,7 +376,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Password',
             icon: new Icon(
               Icons.lock,
-              color: Colors.grey,
+              color: Colors.red[200],
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
@@ -389,7 +402,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+            color: Colors.redAccent,
             child: new Text(_isLoginForm ? 'Login' : 'Create account',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed:() {
