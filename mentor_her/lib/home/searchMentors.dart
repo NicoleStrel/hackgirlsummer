@@ -42,18 +42,20 @@ class _SearchMentorsState extends State<SearchMentors> {
         margin: EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-            TextField(
-              onSubmitted: (String userInput) {
-                setState(() {
-                  nameCity = userInput;
-                });
-              },
-            ),
+//            TextField(
+//              onSubmitted: (String userInput) {
+//                setState(() {
+//                  nameCity = userInput;
+//                });
+//              },
+//            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Specialisation:'),
+                Text('Specialisation:', style: TextStyle(
+                  fontSize: 16,
+                ),),
                 SizedBox(width: 10,),
                 DropdownButton<String>(
                   items: _currencies.map((String dropDownStringItem) {

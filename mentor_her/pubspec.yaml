@@ -52,7 +52,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/undraw_remote_team_h93l.png
     - assets/
   # To add assets to your application, add an assets section, like this:
   # assets:

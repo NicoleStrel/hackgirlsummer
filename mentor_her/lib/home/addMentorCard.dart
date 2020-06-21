@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:havemyback/models/CRUDModel.dart';
 import 'package:havemyback/models/organisationModel.dart';
+import 'package:havemyback/profile/MentorProfile.dart';
 import 'package:provider/provider.dart';
 
 import '../models/mentorModel.dart';
@@ -41,21 +42,26 @@ class _AddMentorCardState extends State<AddMentorCard> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(widget.mentor.fname + " " + widget.mentor.lastname,
-                    style: TextStyle(
-                      fontSize: 18,
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MentorProfile(id:widget.userId, mentor:widget.mentor)));
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(widget.mentor.fname + " " + widget.mentor.lastname,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  Text(widget.mentor.specialisation,
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey
-                    ) ,),
-                ],
+                    Text(widget.mentor.location,
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey
+                      ) ,),
+                  ],
+                ),
               ),
             ),
             RawMaterialButton(
