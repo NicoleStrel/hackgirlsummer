@@ -84,7 +84,6 @@ class _MapState extends State<Map> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final orgProvider = Provider.of<CRUDModel>(context);

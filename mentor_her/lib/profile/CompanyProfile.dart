@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:havemyback/models/organisationModel.dart';
 import 'package:havemyback/profile/listCard.dart';
 const String page3 = "Profile";
 
 class CompanyProfile extends StatefulWidget {
   final String id;
-  CompanyProfile({this.id});
+  final Organisation org;
+  CompanyProfile({this.id, this.org});
   @override
   _CompanyProfileState createState() => _CompanyProfileState();
 }
@@ -37,12 +39,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   maxRadius: 65,
                 ),
                 SizedBox(height: 15,),
-                Text("Company Name",
+                Text(widget.org.cname,
                     style: TextStyle(
                       fontSize: 18,
                     )),
                 SizedBox(height:5),
-                Text("Company description",
+                Text(widget.org.desc,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey,
@@ -56,14 +58,14 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
-                  child: Text("Technology"),
+                  child: Text(widget.org.category),
                 ),
                 SizedBox(height: 5,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.location_on),
-                    Text("Location",
+                    Text(widget.org.location,
                       style: TextStyle(
                         fontSize: 10,
                       ),
