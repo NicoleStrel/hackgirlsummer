@@ -114,5 +114,13 @@ class CRUDModel extends ChangeNotifier {
     return false; //org
 
   }
+  /*   what i wanted to do istoo complex
+  Future<List<List<String>>> getExperienceCollection(String id)async{
+    await _api.addExperiencestoDocument('mentors',id);//add experiences
+    var doc = await _api.getDocumentById('mentors',id);
+    return Mentor.fromMap(doc.data, doc.documentID) ;
+   
+  }
+  */
 
 }
