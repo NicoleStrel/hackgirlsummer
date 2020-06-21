@@ -5,7 +5,7 @@ import 'package:havemyback/models/mentorModel.dart';
 import 'package:havemyback/models/organisationModel.dart';
 import 'package:havemyback/profile/listCard.dart';
 import 'package:provider/provider.dart';
-//import '../global.dart' as global;
+
 const String page3 = "Profile";
 
 class Profile extends StatefulWidget {
@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final collectionProvider = Provider.of<CRUDModel>(context);
-    return SafeArea(
+    return Center(
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child:FutureBuilder<bool>(
@@ -381,31 +381,6 @@ Widget _tabSectionForMentor(BuildContext context) {
   );
   
 }
-/*
-Widget showPrimaryButton(BuildContext context, _formkey) {
-    return new Padding(
-      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-      child: SizedBox(
-        height: 40.0,
-        child: new RaisedButton(
-          elevation: 0.0,
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
-          color: Colors.red[300],
-          child: new Text('Submit',
-              style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-          onPressed:() {
-            if (_formKey.currentState.validate()) {
-              Scaffold
-                  .of(context)
-                  .showSnackBar(SnackBar(content: Text('Processing Data')));
-            }
-          }, 
-        ),
-      )
-    );
-}
-*/
 
 
 

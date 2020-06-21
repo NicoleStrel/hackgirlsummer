@@ -6,7 +6,7 @@ import 'info/info.dart';
 import 'profile/profile.dart';
 
 //constants
-const String page1 = "Info";
+const String page1 = "Awards";
 const String page2 = "Home";
 const String page3 = "Profile";
 
@@ -62,7 +62,7 @@ class _AppLoaderState extends State<AppLoader> {
           selectedItemColor: Colors.red[400],
           items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(IconData(59535, fontFamily: 'MaterialIcons')),
+                icon: Icon(IconData(59448, fontFamily: 'MaterialIcons')),
                 title: Text(page1),
               ),
               BottomNavigationBarItem(
